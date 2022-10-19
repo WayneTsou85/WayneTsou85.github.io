@@ -4,7 +4,16 @@
   <url>
     <loc>https://waynetsou85.github.io/Spring%20Security%20without%20the%20WebSecurityConfigurerAdapter/</loc>
     
-    <lastmod>2022-10-11</lastmod>
+    <lastmod>2022-10-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://waynetsou85.github.io/JUnit-Parameterize-Test/</loc>
+    
+    <lastmod>2022-10-19</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -45,6 +54,34 @@
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://waynetsou85.github.io/tags/JUnit5/</loc>
+    <lastmod>2022-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://waynetsou85.github.io/tags/ParameterizedTest/</loc>
+    <lastmod>2022-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://waynetsou85.github.io/tags/TextBlock/</loc>
+    <lastmod>2022-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://waynetsou85.github.io/tags/CsvSource/</loc>
+    <lastmod>2022-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>https://waynetsou85.github.io/tags/LeetCode/</loc>
