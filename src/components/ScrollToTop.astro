@@ -1,0 +1,28 @@
+---
+
+---
+
+<button type="button" id="scrollToTopBtn" class="header-btn fixed bottom-4 right-2 hidden" title="scroll to top">
+  <i class="ri-arrow-up-line"></i>
+</button>
+
+<script>
+  let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+  // 监听窗口滚动事件
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 200) {
+      scrollToTopBtn.style.display = 'block';
+    } else {
+      scrollToTopBtn.style.display = 'none';
+    }
+  });
+  // 获取按钮的引用
+  scrollToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // 平滑滚动
+    });
+  });
+</script>
+
