@@ -26,10 +26,10 @@ export const site = {
   title: 'Astro Theme Yi', // required
   favicon: '/favicon.svg', // required
   description: 'Welcome to my independent blog website! ',
-  author: "Astro-Yi", // required
+  author: "Wayne Tsou", // required
   avatar: '/avatar.png', // required
-  url: 'https://astro-yi-nu.vercel.app', // required
-  baseUrl: '', // When using GitHubPages, you must enter the repository name startWith '/'. e.g. '/astro-blog'
+  url: 'https://WayneTsou85.github.io', // required
+  baseUrl: '/astro-blog', // When using GitHubPages, you must enter the repository name startWith '/'. e.g. '/astro-blog'
   motto: 'Actions speak louder than words.',
   recentBlogSize: 5,
   archivePageSize: 25,
@@ -49,7 +49,7 @@ export const site = {
  * memosPageSize {number} 10
  */
 export const config = {
-  lang: 'en', // en | zh-cn | zh-Hant | cs
+  lang: 'zh-Hant', // en | zh-cn | zh-Hant | cs
   codeFoldingStartLines: 16, // Need to re-run the project to take effect
 
   // memos config
