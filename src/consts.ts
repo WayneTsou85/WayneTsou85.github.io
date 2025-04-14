@@ -29,7 +29,7 @@ export const site = {
   author: "Wayne Tsou", // required
   avatar: '/avatar.png', // required
   url: 'https://waynetsou85.github.io', // required
-  baseUrl: 'WayneTsou85.github.io', // When using GitHubPages, you must enter the repository name startWith '/'. e.g. '/astro-blog'
+  baseUrl: '/', // When using GitHubPages, you must enter the repository name startWith '/'. e.g. '/astro-blog'
   motto: 'Actions speak louder than words.',
   recentBlogSize: 5,
   archivePageSize: 25,
