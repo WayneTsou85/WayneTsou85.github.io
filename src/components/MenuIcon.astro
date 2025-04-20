@@ -1,0 +1,33 @@
+---
+---
+<button type="button" id="menu-icon" class="header-btn" title="Menu">
+  <i class="ri-menu-fill"/>
+</button>
+<button type="button" id="menu-icon-close" class="header-btn hidden" title="Menu">
+  <i class="ri-close-fill"></i>
+</button>
+
+
+<script>
+  let menuIcon = document.getElementById("menu-icon");
+  let menuCloseIcon = document.getElementById("menu-icon-close");
+  let menu = document.getElementById("mobile-menu");
+  let showAsideBtn = document.getElementById("aside-btn");
+  let closeAsideBtn = document.getElementById("aside-close-btn");
+  let personalInfo = document.getElementById("personal-info");
+  menuIcon.addEventListener("click", () => {
+    if (showAsideBtn && showAsideBtn.classList.contains('hidden')) {
+      toggleHidden([showAsideBtn, closeAsideBtn, personalInfo])
+    }
+    toggleHidden([menuIcon, menuCloseIcon, menu])
+  });
+  menuCloseIcon.addEventListener("click", () => {
+    toggleHidden([menuIcon, menuCloseIcon, menu])
+  });
+
+  function toggleHidden(arr) {
+    arr.forEach(item => {
+      item.classList.toggle("hidden");
+    });
+  }
+</script>
