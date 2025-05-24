@@ -1,120 +1,17 @@
----
-import {getCollectionByName} from "@/utils/getCollectionByName";
-import getUniqueTags from "@/utils/getUniqueTags";
-import getCountByCategory from "@/utils/getCountByCategory";
-import HeaderLink from './HeaderLink.astro';
-import ThemeIcon from './ThemeIcon.astro'
-import MenuIcon from './MenuIcon.astro'
-import {site, categories, infoLinks} from '@/consts';
-import AsideIcon from "./SidebarIcon.astro";
-import {t} from "@/i18n/utils";
-import getCountByTagName from "@/utils/getCountByTagName";
-import getUrl from "@/utils/getUrl";
-const blogs = await getCollectionByName('blog')
-let tagArr = getUniqueTags(blogs);
-let categoryCount = getCountByCategory(blogs);
-let tagCount = getCountByTagName(blogs);
----
-
-<header class="fixed top-0 w-full bg-skin-fill text-skin-base z-10">
-  <div class="flex items-center justify-between container">
-    <div class="block xl:hidden">
-      <MenuIcon></MenuIcon>
+<div
+  class="sticky lg:hidden top-0 z-30 flex h-16 w-full justify-center bg-opacity-90 backdrop-blur transition-all duration-100 bg-base-100 text-base-content shadow-sm"
+>
+  <div class="navbar">
+    <div class="navbar-start">
+      <label for="my-drawer" class="btn btn-square btn-ghost">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"
+          ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </label>
     </div>
-    <a class="text-2xl p-4" href={getUrl("/")}>{site.title}</a>
-    <div class="flex items-center">
-      <div class="hidden xl:block">
-        <div class="flex items-center space-x-5 pr-4">
-          {
-            categories.map(category => (
-              <HeaderLink href={category.href} icon={category.iconClass} target={category.target ? category.target : '_self'} children={category.children ? category.children : []}>{category.name}</HeaderLink>
-            ))
-          }
-        </div>
-      </div>
-      <ThemeIcon></ThemeIcon>
-      <div class="block xl:hidden">
-        <AsideIcon></AsideIcon>
-      </div>
+    <div class="navbar-center">
+      <a class="btn btn-ghost normal-case text-xl" href="/">Manuel Ernesto ⚡️</a>
     </div>
+    <div class="navbar-end"></div>
   </div>
-  <div id="mobile-menu" class="hidden text-center overflow-y-auto pb-8" style="height: calc(100vh - 64px)">
-    {
-      categories.map((category) => (
-        <div class="py-2">
-          <a class=" hover:text-skin-active" href={getUrl(category.href)}>
-            <i class={category.iconClass}/>
-            <span>{category.name}</span>
-          </a>
-          {
-            category.children && category.children.length > 0 &&
-            <div class="divider-horizontal"></div>
-          }
-          <div class="space-y-4 text-sm">
-            {
-              category.children && category.children.map(sub =>
-                (
-                  <a class="block hover:text-skin-active" href={getUrl(sub.href)}>
-                    <i class={sub.iconClass}/>
-                    <span>{sub.name}</span>
-                  </a>
-                )
-              )
-            }
-          </div>
-        </div>
-      ))
-    }
-  </div>
-  <div id="personal-info" class="hidden break-all overflow-y-auto pb-8" style="height: calc(100vh - 64px)">
-    <img class="avatar my-4 mx-auto" src={getUrl(site.avatar)} alt="avatar"/>
-    <div class="mb-2 text-center">{site.motto}</div>
-    <div class="flex items-center justify-center flex-wrap">
-      {
-        infoLinks.map((infoItem) => (
-          <a title={infoItem.name} href={infoItem.outlink} target="_blank">
-            <i class={infoItem.icon + " text-2xl mr-2 cursor-pointer"}/>
-          </a>
-        ))
-      }
-    </div>
-    <div class="divider-horizontal-mini"></div>
-    <div class="text-center">
-      {
-        Object.keys(categoryCount).length > 0 && (
-          <div>
-            <i class="ri-folder-3-line menu-icon"/>{t('sidebar.categories')}
-          </div>
-        )
-      }
-      {
-        Object.keys(categoryCount).map((category) => (
-          <div class="my-2 break-all truncate">
-            <a class="hover:text-skin-active" title={category + " (" + categoryCount[category] + ")"} href={getUrl("/category/") + category}>
-              {category + " (" + categoryCount[category] + ")"}
-            </a>
-          </div>
-
-        ))
-      }
-      {
-        tagArr.length > 0 && (
-          <div class="divider-horizontal-mini"></div>
-          <div class="text-center">
-            <i class="ri-price-tag-3-line menu-icon"/>
-            {t('sidebar.tags')}
-          </div>
-        )
-      }
-      {
-        tagArr &&
-        tagArr.map((tag) => (
-          <div class="my-2 break-all truncate">
-            <a class="hover:text-skin-active my-2" title={tag} href={getUrl("/tags/") + tag}>{tag + " (" + tagCount[tag] + ")"}</a>
-          </div>
-        ))
-      }
-    </div>
-
-  </div>
-</header>
+</div>

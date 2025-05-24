@@ -1,385 +1,289 @@
-# Astro Theme Yi
+# Astrofy | Personal Portfolio Website Template
 
-[[English]](./README.md) | [[简体中文]](./README-ZH-CN.md)
+![Astrofy | Personal Porfolio Website Template](public/social_img.webp)
 
-Demo：[Astro-Theme-Yi](https://astro-yi-nu.vercel.app/)
+Astrofy is a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS. Create in minutes a website with a Blog, CV, Project Section, Store, and RSS Feed.
 
-A content-focused Astro blog theme, Yi, in Chinese, it means fast and concise.
+## Demo
 
-![](https://astro-yi.obs.cn-east-3.myhuaweicloud.com/9.png)
+View a live demo of [Astrofy](https://astrofy-template.netlify.app/)
 
-![](https://astro-yi.obs.cn-east-3.myhuaweicloud.com/1.png)
+## Installation
 
-![](https://astro-yi.obs.cn-east-3.myhuaweicloud.com/8.png)
-
-### 🔥 Features
-
-- [x] Support github pages.
-- [x] Supports multi-platform display.
-- [x] Supports dark mode.
-- [x] Supports Memos.
-- [x] supports i18n.
-- [x] Supports search functionality.
-- [x] SEO-friendly
-- [x] Supports sitemap and RSS.
-- [x] Supports article drafts.
-- [x] Supports Waline/Giscus Comment.
-- [x] Image lazy loading and scaling support.
-- [x] Supports fixed permalinks for articles.
-- [x] Supports meriand
-- [x] Supports mathjax
-- [x] Supports expressive code
-
-......
-
-### Vercel Deplyment
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https%3A%2F%2Fgithub.com%2Fcirry%2Fastro-yi)
-
-Give it a try! Click the button above, and you can deploy with just one click.
-
-### 👨🏻‍💻 Manual Installation
-
-Recommended for use `nodejs >= 18`，`pnpm >= 8`。
+Run the following command in your terminal
 
 ```bash
-git clone https://github.com/cirry/astro-yi.git
-cd astro-yi
-npm install -g pnpm # install pnpm
-pnpm i  # installs dependencies
-npm run dev # preview, starts local dev server at localhost:4321
+pnpm install
 ```
+
+Once the packages are installed you are ready to run astro. Astro comes with a built-in development server that has everything you need for project development. The astro dev command will start the local development server so that you can see your new website in action for the very first time.
 
 ```bash
-npm run build # build your production site to ./dist 
+pnpm run dev
 ```
-After the packaging is completed, Upload the `dist` folder to the web server directory.
 
-### GitHub Pages deployment
+## Tech Stack
 
-In /src/consts.ts, modify the contents of the site field:
+- [Astro](https://astro.build)
+- [tailwindcss](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+
+## Project Structure
+
+```php
+├── src/
+│   ├── components/
+│   │   ├── cv/
+│   │   │   ├── TimeLine
+│   │   ├── BaseHead.astro
+│   │   ├── Card.astro
+│   │   ├── Footer.astro
+│   │   ├── Header.astro
+│   │   └── HorizontalCard.astro
+│   │   └── SideBar.astro
+│   │   └── SideBarMenu.astro
+│   │   └── SideBarFooter.astro
+│   ├── content/
+│   │   ├── blog/
+│   │   │   ├── post1.md
+│   │   │   ├── post2.md
+│   │   │   └── post3.md
+│   │   ├── store/
+│   │   │   ├── item1.md
+│   │   │   ├── item2.md
+│   ├── layouts/
+│   │   └── BaseLayout.astro
+│   │   └── PostLayout.astro
+│   └── pages/
+│   │   ├── blog/
+│   │   │   ├── [...page].astro
+│   │   │   ├── [slug].astro
+│   │   └── cv.astro
+│   │   └── index.astro
+│   │   └── projects.astro
+│   │   └── rss.xml.js
+│   ├── styles/
+│   │   └── global.css
+│   └── config.ts
+├── public/
+│   ├── favicon.svg
+│   └── profile.webp
+│   └── social_img.webp
+├── astro.config.mjs
+├── tailwind.config.cjs
+├── package.json
+└── tsconfig.json
+```
+
+### Site config
+
+You can change global site configuration on '/src/config.ts' file:
+
+- **SITE_TITLE**: Default pages title.
+- **SITE_DESCRIPTION**: Default pages title.
+- **GENERATE_SLUG_FROM_TITLE**: By default Astrofy will generate the blog slug pages base on the article name. Set this var to false if you want to use the Astro file base (Compatible with Astrofy older versions).
+- **TRANSITION_API**: Enable and disable transition API
+
+### Components usage
+
+#### Layout Components
+
+The `BaseHead`, `Footer`, `Header`, and `SideBar` components are already included in the layout system. To change the website content you can edit the content of these components.
+
+##### SideBar
+
+In the Sidebar you can change your profilePicture, links to all your website pages, and your social icons.
+
+You can change your avatar shape using [mask classes](https://daisyui.com/components/mask/).
+
+The used social-icons are SVG form [BoxIcons](https://boxicons.com/) pack. You can replace the icons in the `SideBarFooter` component
+
+To add a new page in the sidebar go to the `SideBarMenu` component.
+
+```
+<li><a class="py-3 text-base" id="home" href="/">Home</a></li>
+
+```
+
+**Note**: In order to change the sidebar menu's active item, you need to setup the prop `sideBarActiveItemID` in the `BaseLayout` component of your new page and add that id to the link in the `SideBarMenu`
+
+#### TimeLine
+
+The timeline components are used to confirm the CV.
+
+```html
+<div class="time-line-container">
+  <TimeLineElement title="Element Title" subtitle="Subtitle">
+    Content that can contain
+    <div>divs</div>
+    and <span>anything else you want</span>.
+  </TimeLineElement>
+  ...
+</div>
+```
+
+#### Card & HorizontalCard
+
+The cards are primarly used for the Project and the Blog components. They include a picture, a title, and a description. 
+
+```html
+<HorizontalCard title="Card Title" img="imge_url" desc="Description" url="Link
+URL" target="Optional link target (_blank default)" badge="Optional badge"
+tags={['Array','of','tags']} />
+```
+
+#### HorizontalCard Shop Item
+
+
+This component is already included in the Store layout of the template. In case you want to use it in another place these are the props.
+
+```html
+<HorizontalShopItem
+  title="Item Title"
+  img="imge_url"
+  desc="Item description"
+  pricing="current_price"
+  oldPricing="old_price"
+  checkoutUrl="external store checkout url"
+  badge="Optional badge"
+  url="item details url"
+  custom_link="Custom link url"
+  custom_link_label="Cutom link btn label"
+  target="Optional link target (_self default)"
+/>
+```
+
+#### Adding a Custom Component
+
+To add a custom component, you can create a .astro file in the components folder under the source folder. 
+
+Components must follow this template. The ```---``` represents the code fence and uses Javascript and can be used for imports. 
+
+The HTML component is the actual style of your new component. 
+
+```html
+---
+// Component Script (JavaScript)
+---
+<!-- Component Template (HTML + JS Expressions) -->
+```
+
+For more details, see the [astro components](https://docs.astro.build/en/core-concepts/astro-components/) documentation here. 
+
+### Layouts
+
+Include `BaseLayout` in each page you add and `PostLayout` to your post pages.
+
+The BaseLayout defines a general template for each new webpage you want to add. It imports constants SITE_TITLE and SITE_DESCRIPTION which can be modified in the ```../config``` folder. Data placed there can be imported anywhere using import. 
+
+### Content
+
+You can add a [content collection](https://docs.astro.build/en/guides/content-collections/) in `/content/' folder, you will need add it at config.ts.
+
+#### config.ts
+
+Where you need to define your content collections, we define our content schemas too.
+
+#### Blog
+
+Add your `md` blog post in the `/content/blog/` folder.
+
+##### Post format
+
+Add code with this format in the top of each post file.
+
+```
+---
+title: "Post Title"
+description: "Description"
+pubDate: "Post date format(Sep 10 2022)"
+heroImage: "Post Hero Image URL"
+---
+```
+
+### Pages
+
+#### Blog
+
+Blog uses Astro's content collection to query post's `md`.
+
+##### [page].astro
+
+The `[page].astro` is the route to work with the paginated post list. You can change there the number of items listed for each page and the pagination button labels.
+
+##### [slug].astro
+
+The `[slug].astro` is the base route for every blog post, you can customize the page layout or behaviour, by default uses `content/blog` for content collection and `PostLayout` as layout.
+
+#### Shop
+
+Add your `md` item in the `/pages/shop/` folder.
+
+##### [page].astro
+
+The `[page].astro` is the route to work with the paginated item list. You can change there the number of items listed for each page and the pagination button labels. The shop will render all `.md` files you include inside this folder.
+
+##### Item format
+
+Add code with this format at the top of each item file.
 
 ```js
-export const site = {
-  // ...
-  url: 'https://cirry.github.io', // required,  website origin
-  baseUrl: '/yi.github.io', // When using GitHubPages, you must enter the repository name startwith '/'
-  // ...
-}
-```
-
-## Configuration
-
-The only profile for this blog is: `src/consts.ts`, you can make some modifications according to your needs.
-
-```ts
-/**
- * title {string} website title
- * favicon {string} website favicon url
- * description {string} website description
- * author {string} author
- * avatar {string} Avatar used in the profile
- * motto {string} used in the profile
- * url {string} Website link
- * baseUrl {string} When using GitHubPages, you must enter the repository name
- * recentBlogSize {number} Number of recent articles displayed in the sidebar
- * archivePageSize {number} Number of articles on archive pages
- * postPageSize {number} Number of articles on blog pages
- * feedPageSize {number} Number of articles on feed pages
- * beian {string} Chinese policy
- */
-export const site = {
-    title: 'Astro Theme Yi',
-    favicon: '/favicon.svg',
-    description: 'Welcome to my independent blog website! ',
-    author: "xxxxx",
-    avatar: '/avatar.png',
-    motto: 'Keep moving.',
-    url: 'https://astro-yi-nu.vercel.app',
-    recentBlogSize: 5,
-    archivePageSize: 25,
-    postPageSize: 10,
-    feedPageSize: 20,
-    beian: ''
-  }
-
-/**
- * lang {string} Default website language: English
- * codeFoldingStartLines {number} default 16
- * memosUrl {string} memos server url
- * memosUsername {string} memos login name
- * memosPageSize {number} 10
- */
-export const config = {
-  lang: 'en', // English: en | 简体中文: zh-cn | 繁體中文: zh-Hant | cs
-  codeFoldingStartLines: 16, // Need to re-run the project to take effect
-  
-  // memos config
-  memosUrl: '', // https://xxxx.xxx.xx
-  memosUsername: '', // login name
-  memosPageSize: 10, // number
-}
-
-/**
- * Navigator
- */
-export const categories = [
-  {
-    name: "Homepage",
-    iconClass: "ri-home-4-line",
-    href: "/",
-  },
-  {
-    name: "Blog",
-    iconClass: "ri-draft-line",
-    href: "/blog/1",
-  },
-  {
-    name: "Feed",
-    iconClass: "ri-lightbulb-flash-line",
-    href: "/feed/1",
-  },
-  {
-    name: "Archive",
-    iconClass: "ri-archive-line",
-    href: "/archive/1",
-  },
-  {
-    name: "Message",
-    iconClass: "ri-chat-1-line",
-    href: "/message/",
-  },
-  {
-    name: "Search",
-    iconClass: "ri-search-line",
-    href: "/search",
-  },
-  {
-    name: "More",
-    iconClass: "ri-more-fill",
-    href: "javascript:void(0);",
-    children: [
-      {
-        name: 'About',
-        iconClass: 'ri-information-line',
-        href: '/about',
-      },
-      {
-        name: 'Friends',
-        iconClass: 'ri-user-5-line',
-        href: '/friends',
-        target: '_self', // _self | _blank
-      },
-    ]
-  }
-]
-
-/**
- * Personal link address
- */
-export const infoLinks = [
-  {
-    icon: 'ri-telegram-fill',
-    name: 'telegram',
-    outlink: 'xxxxxxx',
-  },
-  {
-    icon: 'ri-twitter-fill',
-    name: 'twitter',
-    outlink: 'xxxxxxx',
-  },
-  {
-    icon: 'ri-instagram-fill',
-    name: 'instagram',
-    outlink: 'xxxxxxx',
-  },
-  {
-    icon: 'ri-github-fill',
-    name: 'github',
-    outlink: 'https://github.com/cirry',
-  },
-  {
-    icon: 'ri-mail-fill',
-    name: 'xxxxxxx@gmail.com',
-    outlink: 'mailto:xxxxxxx@gmail.com',
-  },
-  {
-    icon: 'ri-rss-fill',
-    name: 'rss',
-    outlink: 'https://xxxxx.com/rss.xml',
-  }
-]
-
-/**
- * Donation feature
- * Please replace the image and paypal link before use.
- * enable {boolean}
- * tip {string}
- */
-export const donate = {
-  enable: false,
-  tip: "Thanks for the coffee !!!☕",
-  wechatQRCode: "/WeChatQR.png",
-  alipayQRCode: "/AliPayQR.png",
-  paypalUrl: "https://paypal.me/xxxxxxxx",
-}
-
-/**
- * Friends Links Page
- * name {string}
- * url {string}
- * avatar {string}
- * description {string}
- */
-export const friendshipLinks =
-  [
-    {
-      name: "Cirry's Blog",
-      url: 'https://cirry.cn',
-      avatar: "https://cirry.cn/avatar.png",
-      description: 'frontend development'
-    },
-  ]
-
-/**
- * Comment Feature
- * enable {boolean}
- * type {string} giscus and waline are currently supported.
- * walineConfig.serverUrl {string} server link
- * walineConfig.pageSize {number} number of comments per page. default 10
- * walineConfig.wordLimit {number} Comment word s limit. When a single number is filled in, it 's the maximum number of comment words. No limit when set to 0
- * walineConfig.count {number} recent comment numbers
- * walineConfig.pageview {boolean} display the number of page views and comments of the article
- * walineConfig.reaction {string | string[]} Add emoji interaction function to the article
- * walineConfig.requiredMeta {string[]}  Set required fields, default anonymous
- */
-export const comment = {
-  enable: false,
-  type: 'giscus', // waline | giscus,
-  walineConfig:{
-    serverUrl: "https://xxxxx.xxxxx.app",
-    lang: 'en',
-    pageSize: 20,
-    wordLimit: '',
-    count: 5,
-    pageview: true,
-    reaction: true,
-    requiredMeta: ["nick", "mail"],
-    whiteList: ['/message/', '/friends/'],
-  },
-
-  // giscus config
-  giscusConfig: {
-    'data-repo': "xxxxxxx",
-    'data-repo-id': "xxxxxx",
-    'data-category': "Announcements",
-    'data-category-id': "xxxxxxxxx",
-    'data-mapping': "pathname",
-    'data-strict': "0",
-    'data-reactions-enabled': "1",
-    'data-emit-metadata': "0",
-    'data-input-position': "bottom",
-    'data-theme': "light",
-    'data-lang': "xxxxxxxxxxx",
-    'crossorigin': "anonymous",
-  }
-}
-
-/**
- * Analytics Feature Configuration
- *
- * This file centralizes the analytics configuration for the application.
- * It defines and exports the default settings for Umami and Google Analytics.
- */
-export const analytics: AnalyticsConfig = {
-  enable: false,
-  umamiConfig: {
-    enable: false,
-    id: "",
-    url: ""
-  },
-  gaConfig: {
-    enable: false,
-    id: ""
-  },
-  busuanzi: false,
-};
-
-```
-
-Please modify your website configuration, comment system configuration, appreciation function image, personal information links, and of course, you can also modify other configuration content.
-
-### Write a blog 
-
-With the Yi theme, all you need to do is create a new md document in `src/content/blog` and you're ready to start writing your blog.
-
-According to Astro's Markdown document standard, each document should have its own frontmatter information and add `---` as the beginning and the end of the document's header in md to mark the frontmatter, which gives us a lot of convenience:.
-
-1. for example, if we want to add tags and categories to a document or top some documents, we can add some attributes to the document in Frontmatter, such as `tags`, `sticky` and so on.
-
-2. For example, to avoid using Chinese as the blog path and file name, we can set `title` as the title of the md document in Chinese, and the file name in English with `-` as the word connecting symbol.
-
-In Astro-Yi, You need to set two important properties: **title** and **date**, the following is the simplest frontmatter setup for a Md document:
-
-```yaml
 ---
-title: Display pictures
-date: 2024-03-05
+title: "Demo Item 1"
+description: "Item description"
+heroImage: "Item img url"
+details: true // show or hide details btn
+custom_link_label: "Custom btn link label"
+custom_link: "Custom btn link"
+pubDate: "Sep 15 2022"
+pricing: "$15"
+oldPricing: "$25.5"
+badge: "Featured"
+checkoutUrl: "https://checkouturl.com/"
 ---
 ```
 
-If you feel that this is not quite enough, Yi also provides more properties for you to use, this is a complete example:
+#### Static pages
 
-```yaml
----
-title: Display pictures
-description: Display pictures
-date: 2024-03-05
-tags: [astro]
-category: astro
-sticky: 100  // Document top weight, the larger the number, the greater the weight
-slug: poem/ci //  Permanent link to document
-mathjax: false // enable formula display
-mermaid: false // enable mermaid
-draft: false
-toc: true
-donate: false
-comment: false
-ogImage: https://xxxxx/xxxxx/xxxxx // cover image
----
-```
+The other pages included in the template are static pages. The `index` page belongs to the root page. You can add your pages directly in the `/pages` folder and then add a link to those pages in the `sidebar` component.
 
-### Write a feed
+Feel free to modify the content included in the pages that the template contains or add the ones you need.
 
-With the Yi theme, all you need to do is create a new md document in `src/content/feed` and you're ready to start writing.
+### Theming
 
-feed frontmatter needs to set an important property **date**, the rest of the attributes are optional.
+To change the template theme change the `data-theme` attribute of the `<html>` tag in `BaseLayout.astro` file.
 
-```yaml
----
-date: 2024-03-20
----
-```
+You can choose among 30 themes available or create your custom theme. See themes available [here](https://daisyui.com/docs/themes/).
 
-### Modify icons
+## Sitemap
 
-All the icons in the blog are using the open source icon library [remixicon](https://remixicon.cn/), you can replace your favorite icons by yourself.
+The Sitemap is generated automatically when you build your website in the root of the domain. Please update the `robots.txt` file in the public folder with your site name URL for the Sitemap.
 
-### Note
+## Deploy
 
-In the `astro.config.js` file in the root directory, it is recommended to modify the `site` property to correctly generate the site map.
+You can deploy your site on your favourite static hosting service such as Vercel, Netlify, GitHub Pages, etc.
 
-```js
-export default defineConfig({
-  site: 'https://xxxx.com',// Modify to your own website address
-  // ...
-})
-```
+The configuration for the deployment varies depending on the platform where you are going to do it. See the [official Astro information](https://docs.astro.build/en/guides/deploy/) to deploy your website.
 
-Add a line to the path of your sitemap file at the end of the robots.txt file in the public directory.
+> **⚠️ CAUTION** </br>
+> The Blog pagination of this template is implemented using dynamic route parameters in its filename and for now this format is incompatible with SSR deploy configs, so please use the default static deploy options for your deployments.
 
+## Contributing
 
-```text
-Sitemap: [blog-url]/sitemap-0.xml
-// ps：Sitemap: https://astro-yi-nu.vercel.app/sitemap-0.xml
-```
+Suggestions and pull requests are welcomed! Feel free to open a discussion or an issue for a new feature request or bug.
+
+One of the best ways to contribute is to grab a [bug report or feature suggestion](https://github.com/manuelernestog/astrofy/issues) that has been marked `accepted` and dig in.
+
+Please be wary of working on issues _not_ marked as `accepted`. Just because someone has created an issue doesn't mean we'll accept a pull request for it.
+
+## License
+
+Astrofy is licensed under the MIT license — see the [LICENSE](https://github.com/manuelernestog/astrofy/blob/main/LICENSE) file for details.
+
+## Contributors
+
+<a href="https://github.com/manuelernestog/astrofy/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=manuelernestog/astrofy" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
