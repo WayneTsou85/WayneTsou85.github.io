@@ -1,12 +1,15 @@
-# Astrofy | Personal Portfolio Website Template
+# Wayne's Blog
 
-![Astrofy | Personal Porfolio Website Template](public/social_img.webp)
+基於 Astro 4 + TailwindCSS + DaisyUI 的個人部落格網站。
 
-Astrofy is a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS. Create in minutes a website with a Blog, CV, Project Section, Store, and RSS Feed.
+Site: https://waynetsou85.github.io/
 
-## Demo
+## TODO
 
-View a live demo of [Astrofy](https://astrofy-template.netlify.app/)
+- [ ] 替換側邊欄大頭貼 `public/profile.webp`
+- [ ] 替換社群分享預覽圖 `public/social_img.webp`
+- [ ] 替換瀏覽器 favicon `public/favicon.svg`
+- [ ] 填寫 CV 頁面內容 `src/pages/cv.astro`
 
 ## Installation
 
