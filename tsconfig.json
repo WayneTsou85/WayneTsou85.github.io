@@ -9,6 +9,9 @@
       ],
       "@layouts/*": [
         "src/layouts/*"
+      ],
+      "@lib/*": [
+        "src/lib/*"
       ]
     }
   }
