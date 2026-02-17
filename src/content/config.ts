@@ -6,6 +6,8 @@ const blogSchema = z.object({
   updatedDate: z.string().optional(),
   heroImage: z.string().optional(),
   badge: z.string().optional(),
+  series: z.string().optional(),
+  seriesOrder: z.number().optional(),
   tags: z
     .array(z.string())
     .refine((items) => new Set(items).size === items.length, {

@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
 import BackToTop from "../components/BackToTop.astro";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import { ViewTransitions } from "astro:transitions";
 
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
@@ -26,6 +27,7 @@ const {
 </script>
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
+    <GoogleAnalytics />
     {TRANSITION_API && <ViewTransitions />}
     <slot name="head" />
   </head>

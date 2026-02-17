@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import createSlug from "@lib/createSlug";
+
+interface Props {
+  series?: string;
+  currentSlug: string;
+}
+
+const { series, currentSlug } = Astro.props;
+
+let seriesPosts: { title: string; slug: string; order: number; isCurrent: boolean }[] = [];
+let prevPost: typeof seriesPosts[0] | null = null;
+let nextPost: typeof seriesPosts[0] | null = null;
+
+if (series) {
+  const allPosts = await getCollection("blog");
+  seriesPosts = allPosts
+    .filter((p) => p.data.series === series)
+    .map((p) => ({
+      title: p.data.title,
+      slug: createSlug(p.data.title, p.slug),
+      order: p.data.seriesOrder ?? 0,
+      isCurrent: createSlug(p.data.title, p.slug) === currentSlug,
+    }))
+    .sort((a, b) => a.order - b.order);
+
+  const currentIndex = seriesPosts.findIndex((p) => p.isCurrent);
+  if (currentIndex > 0) prevPost = seriesPosts[currentIndex - 1];
+  if (currentIndex < seriesPosts.length - 1) nextPost = seriesPosts[currentIndex + 1];
+}
+---
+
+{series && seriesPosts.length > 1 && (
+  <div class="not-prose my-6 p-4 bg-base-200 rounded-lg">
+    <div class="font-bold text-lg mb-3">Series: {series}</div>
+    <ol class="list-decimal list-inside space-y-1 text-sm mb-4">
+      {seriesPosts.map((post) => (
+        <li class={post.isCurrent ? "font-bold" : ""}>
+          {post.isCurrent ? (
+            <span>{post.title}</span>
+          ) : (
+            <a href={`/blog/${post.slug}`} class="link link-hover">{post.title}</a>
+          )}
+        </li>
+      ))}
+    </ol>
+    <div class="flex justify-between gap-4">
+      {prevPost ? (
+        <a href={`/blog/${prevPost.slug}`} class="btn btn-sm btn-outline flex-1">
+          &larr; {prevPost.title}
+        </a>
+      ) : <div />}
+      {nextPost ? (
+        <a href={`/blog/${nextPost.slug}`} class="btn btn-sm btn-outline flex-1 text-right">
+          {nextPost.title} &rarr;
+        </a>
+      ) : <div />}
+    </div>
+  </div>
+)}

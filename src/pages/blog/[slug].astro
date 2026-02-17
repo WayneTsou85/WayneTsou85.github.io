@@ -19,7 +19,7 @@ interface Props {
 
 const { entry } = Astro.props;
 const post: BlogSchema = entry.data;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 const readingTime = getReadingTime(entry.body);
 ---
 
@@ -32,6 +32,10 @@ const readingTime = getReadingTime(entry.body);
   badge={post.badge}
   tags={post.tags}
   readingTime={readingTime}
+  headings={headings}
+  series={post.series}
+  seriesOrder={post.seriesOrder}
+  currentSlug={createSlug(post.title, entry.slug)}
 >
   <Content />
 </PostLayout>

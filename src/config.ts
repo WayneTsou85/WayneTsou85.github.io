@@ -6,3 +6,5 @@ export const SITE_DESCRIPTION =
   "Wayne Tsou 的個人部落格，分享軟體工程、技術筆記與開發經驗。";
 export const GENERATE_SLUG_FROM_TITLE = true;
 export const TRANSITION_API = true;
+// Google Analytics 4 Measurement ID（留空則不啟用）
+export const GA4_MEASUREMENT_ID = "";

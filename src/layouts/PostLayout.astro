@@ -1,14 +1,18 @@
 ---
 import { type BlogSchema } from "../content/config";
 import BaseLayout from "./BaseLayout.astro";
+import TableOfContents from "@components/TableOfContents.astro";
+import SeriesNav from "@components/SeriesNav.astro";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
 export interface Props extends BlogSchema {
   readingTime?: string;
+  headings?: { depth: number; slug: string; text: string }[];
+  currentSlug?: string;
 }
 
-const { title, description, pubDate, updatedDate, heroImage, badge, tags = [], readingTime } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, badge, tags = [], readingTime, headings = [], series, seriesOrder, currentSlug = "" } = Astro.props;
 dayjs.extend(localizedFormat);
 const displayDate = dayjs(pubDate).format("ll")
 import { Image } from "astro:assets";
@@ -51,7 +55,9 @@ const jsonLd = {
         )
       }
       <div class="divider my-2"></div>
+      <TableOfContents headings={headings} />
       <slot />
+      <SeriesNav series={series} currentSlug={currentSlug} />
     </article>
   </main>
 </BaseLayout>
