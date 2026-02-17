@@ -6,10 +6,7 @@ Site: https://waynetsou85.github.io/
 
 ## TODO
 
-- [ ] 替換側邊欄大頭貼 `public/profile.webp`
-- [ ] 替換社群分享預覽圖 `public/social_img.webp`
-- [ ] 替換瀏覽器 favicon `public/favicon.svg`
-- [ ] 填寫 CV 頁面內容 `src/pages/cv.astro`
+詳見 [TODO.md](./TODO.md)
 
 ## Installation
 
