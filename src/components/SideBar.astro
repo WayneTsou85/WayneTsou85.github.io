@@ -2,6 +2,7 @@
 import SideBarFooter from "./SideBarFooter.astro";
 import { Image } from "astro:assets";
 import SideBarMenu from "./SideBarMenu.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 const { sideBarActiveItemID } = Astro.props;
 ---
 
@@ -18,6 +19,9 @@ const { sideBarActiveItemID } = Astro.props;
       </a>
     </div>
     <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+    <div class="flex justify-center py-2">
+      <ThemeToggle />
+    </div>
     <SideBarFooter />
   </aside>
 </div>

@@ -35,14 +35,16 @@ pnpm run dev
 │   ├── components/
 │   │   ├── cv/
 │   │   │   ├── TimeLine
+│   │   ├── BackToTop.astro
 │   │   ├── BaseHead.astro
 │   │   ├── Card.astro
 │   │   ├── Footer.astro
 │   │   ├── Header.astro
-│   │   └── HorizontalCard.astro
-│   │   └── SideBar.astro
-│   │   └── SideBarMenu.astro
-│   │   └── SideBarFooter.astro
+│   │   ├── HorizontalCard.astro
+│   │   ├── SideBar.astro
+│   │   ├── SideBarMenu.astro
+│   │   ├── SideBarFooter.astro
+│   │   └── ThemeToggle.astro
 │   ├── content/
 │   │   ├── blog/
 │   │   │   ├── post1.md
@@ -251,9 +253,21 @@ Feel free to modify the content included in the pages that the template contains
 
 ### Theming
 
-To change the template theme change the `data-theme` attribute of the `<html>` tag in `BaseLayout.astro` file.
+The site supports dark mode toggle (lofi / dark themes). Users can switch themes via the toggle button in the header (mobile) and sidebar (desktop). Theme preference is saved in `localStorage`.
 
-You can choose among 30 themes available or create your custom theme. See themes available [here](https://daisyui.com/docs/themes/).
+You can customize themes in DaisyUI. See themes available [here](https://daisyui.com/docs/themes/).
+
+### Reading Time
+
+Blog posts automatically display estimated reading time. Calculation uses 500 chars/min for Chinese and 200 words/min for English. Logic is in `src/lib/readingTime.ts`.
+
+### Back to Top
+
+A floating "back to top" button appears when scrolling past 300px. Component: `src/components/BackToTop.astro`.
+
+### Blog Search
+
+The blog listing page includes a client-side search box that filters posts by title and description in real-time.
 
 ## Sitemap
 

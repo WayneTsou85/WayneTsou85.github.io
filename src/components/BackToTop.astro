@@ -1,0 +1,36 @@
+---
+---
+
+<button
+  id="back-to-top"
+  class="fixed bottom-8 right-8 btn btn-circle btn-primary opacity-0 pointer-events-none transition-opacity duration-300 z-50"
+  aria-label="Back to top"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+  </svg>
+</button>
+
+<script is:inline>
+  function initBackToTop() {
+    const btn = document.getElementById('back-to-top');
+    if (!btn) return;
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        btn.classList.remove('opacity-0', 'pointer-events-none');
+        btn.classList.add('opacity-100');
+      } else {
+        btn.classList.add('opacity-0', 'pointer-events-none');
+        btn.classList.remove('opacity-100');
+      }
+    });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  initBackToTop();
+  document.addEventListener('astro:after-swap', initBackToTop);
+</script>

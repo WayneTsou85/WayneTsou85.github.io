@@ -4,20 +4,34 @@ import BaseLayout from "./BaseLayout.astro";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 
-export interface Props extends BlogSchema {}
+export interface Props extends BlogSchema {
+  readingTime?: string;
+}
 
-const { title, description, pubDate, updatedDate, heroImage, badge, tags = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, badge, tags = [], readingTime } = Astro.props;
 dayjs.extend(localizedFormat);
 const displayDate = dayjs(pubDate).format("ll")
 import { Image } from "astro:assets";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": pubDate ? new Date(pubDate).toISOString() : undefined,
+  "dateModified": updatedDate ? new Date(updatedDate).toISOString() : undefined,
+  "image": heroImage ? new URL(heroImage, Astro.site).toString() : undefined,
+};
 ---
 
-<BaseLayout title={title} description={description} image={heroImage}, ogType="article">
+<BaseLayout title={title} description={description} image={heroImage} ogType="article">
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
   <main class="md:flex md:justify-center">
     <article class="prose prose-lg max-w-[750px] prose-img:mx-auto">
       {heroImage && <Image width={750} height={422} format="webp" src={heroImage} alt={title} class="w-full mb-6" />}
       <h1 class="title my-2 text-4xl font-bold">{title}</h1>
       {pubDate && <time>{displayDate}</time>}
+      {readingTime && <span class="ml-2 text-base opacity-70">· {readingTime}</span>}
       <br />
       {badge && <div class="badge badge-secondary my-1">{badge}</div>}
       {

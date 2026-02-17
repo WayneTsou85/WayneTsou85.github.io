@@ -18,6 +18,15 @@ const { page } = Astro.props;
     <div class="text-3xl w-full font-bold">Blog</div>
   </div>
 
+  <div class="mb-5">
+    <input
+      type="text"
+      id="blog-search"
+      placeholder="Search posts..."
+      class="input input-bordered w-full"
+    />
+  </div>
+
   {
     page.data.length === 0 ? (
       <div class="bg-base-200 border-l-4 border-secondary w-full p-4 min-w-full">
@@ -25,9 +34,9 @@ const { page } = Astro.props;
         <p>There are no blog posts to show at the moment. Check back later!</p>
       </div>
     ) : (
-      <ul>
+      <ul id="blog-list">
         {page.data.map((post) => (
-          <>
+          <li class="blog-item" data-title={post.data.title.toLowerCase()} data-desc={post.data.description.toLowerCase()}>
             <HorizontalCard
               title={post.data.title}
               img={post.data.heroImage}
@@ -38,7 +47,7 @@ const { page } = Astro.props;
               tags={post.data.tags}
             />
             <div class="divider my-0" />
-          </>
+          </li>
         ))}
       </ul>
     )
@@ -84,4 +93,25 @@ const { page } = Astro.props;
       )
     }
   </div>
+
+  <script is:inline>
+    function initSearch() {
+      const input = document.getElementById('blog-search');
+      const items = document.querySelectorAll('.blog-item');
+      if (!input || !items.length) return;
+
+      input.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        items.forEach(item => {
+          const title = item.getAttribute('data-title') || '';
+          const desc = item.getAttribute('data-desc') || '';
+          const match = !query || title.includes(query) || desc.includes(query);
+          item.style.display = match ? '' : 'none';
+        });
+      });
+    }
+
+    initSearch();
+    document.addEventListener('astro:after-swap', initSearch);
+  </script>
 </BaseLayout>

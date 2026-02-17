@@ -3,6 +3,7 @@ import { CollectionEntry, getCollection } from "astro:content";
 import { BlogSchema } from "../../content/config";
 import PostLayout from "../../layouts/PostLayout.astro";
 import createSlug from "../../lib/createSlug"
+import { getReadingTime } from "../../lib/readingTime"
 
 export async function getStaticPaths() {
   const postEntries = await getCollection("blog");
@@ -19,6 +20,7 @@ interface Props {
 const { entry } = Astro.props;
 const post: BlogSchema = entry.data;
 const { Content } = await entry.render();
+const readingTime = getReadingTime(entry.body);
 ---
 
 <PostLayout
@@ -29,6 +31,7 @@ const { Content } = await entry.render();
   updatedDate={post.updatedDate}
   badge={post.badge}
   tags={post.tags}
+  readingTime={readingTime}
 >
   <Content />
 </PostLayout>
